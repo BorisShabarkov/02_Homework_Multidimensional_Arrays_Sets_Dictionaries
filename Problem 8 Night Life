@@ -1,0 +1,70 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class NightLife
+{
+    static void Main()
+    {
+        Dictionary<string, SortedDictionary<string, List<string>>> cities = new Dictionary<string, SortedDictionary<string, List<string>>>();
+
+        // Filling dictionaries and lists
+        string[] inputString = Console.ReadLine().Split(';');
+        while (inputString[0] != "END")
+        {
+            if (!cities.Keys.Contains(inputString[0]))
+            {
+                cities.Add(inputString[0], new SortedDictionary<string, List<string>>());
+            }
+            
+            if (!cities[inputString[0]].Keys.Contains(inputString[1]))
+            {
+                cities[inputString[0]].Add(inputString[1], new List<string>());
+            }
+            
+            bool isDuplicate = true;
+            for (int i = 0; i < cities[inputString[0]][inputString[1]].Count; i++)
+            {
+                if (inputString[2] == cities[inputString[0]][inputString[1]][i])
+                {
+                    isDuplicate = false;
+                }
+            }
+            if (isDuplicate) cities[inputString[0]][inputString[1]].Add(inputString[2]);
+
+            inputString = Console.ReadLine().Split(';');
+        }
+
+        // Sorting Lists
+        foreach (var city in cities.Keys)
+        {
+            foreach (var venue in cities[city].Keys)
+            {
+                cities[city][venue].Sort();
+            }
+        }
+
+
+        // Printing 
+        Console.WriteLine();
+        foreach (var city in cities.Keys)
+        {
+            Console.WriteLine(city);
+            foreach (var venue in cities[city].Keys)
+            {
+                Console.Write("-> {0}: ", venue);
+                for (int i = 0; i < (cities[city][venue].Count-1); i++)
+                {                
+                    Console.Write("{0}, ",cities[city][venue][i]);
+                }
+                Console.Write("{0} ", cities[city][venue][cities[city][venue].Count-1]);
+                Console.WriteLine();
+            }
+        }
+        Console.WriteLine();
+
+
+
+    }
+}
+
