@@ -1,0 +1,181 @@
+using System;
+using System.Collections.Generic;
+
+
+class SequenceInMatrix
+    {
+        static void Main()
+        {
+            Console.WriteLine("Insert number of rows:");
+            int n = int.Parse(Console.ReadLine());
+            Console.WriteLine("Insert number of columns:");
+            int m = int.Parse(Console.ReadLine());
+            Console.WriteLine("Insert each row in seprate line, columns separated by space:");
+            string[,] ourArray = new string[n, m];
+
+            List<string> final = new List<string>();
+            for (int i = 0; i < ourArray.GetLength(0); i++)
+            {
+                string[] inputString = Console.ReadLine().Split(' ');
+                for (int j = 0; j < ourArray.GetLength(1); j++)
+                {
+                    ourArray[i, j] = inputString[j];
+                }
+            }
+            
+            
+            //checking horizontal
+            for (int i = 0; i < ourArray.GetLength(0); i++)
+            {
+                List<string> tempList = new List<string>();
+                tempList.Add(ourArray[i, 0]);
+                for (int j = 1; j < ourArray.GetLength(1); j++)
+                {
+                    if (ourArray[i, j] == ourArray[i, j - 1])
+                    {
+                        tempList.Add(ourArray[i, j]);
+                        if (j == ourArray.GetLength(1) - 1)
+                        {
+                            if (tempList.Count > final.Count)
+                            {
+                                final.Clear();
+                                foreach (var item in tempList)
+                                {
+                                    final.Add(item);
+                                }
+                                tempList.Clear();
+                                tempList.Add(ourArray[i, j]);
+                            }
+                            else
+                            {
+                                tempList.Clear();
+                                tempList.Add(ourArray[i, j]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tempList.Count > final.Count)
+                        {
+                            final.Clear();
+                            foreach (var item in tempList)
+                            {
+                                final.Add(item);
+                            }
+                            tempList.Clear();
+                            tempList.Add(ourArray[i, j]);
+                        }
+                        else
+                        {
+                            tempList.Clear();
+                            tempList.Add(ourArray[i, j]);
+                        }
+                    }
+                }
+            }
+            
+            
+            // checking vertical
+            for (int i = 0; i < ourArray.GetLength(1); i++)
+            {
+                List<string> tempList = new List<string>();
+                tempList.Add(ourArray[0, i]);
+                for (int j = 1; j < ourArray.GetLength(0); j++)
+                {
+                    if (ourArray[j, i] == ourArray[j - 1, i])
+                    {
+                        tempList.Add(ourArray[j, i]);
+                        if (j == ourArray.GetLength(0) - 1)
+                        {
+                            if (tempList.Count > final.Count)
+                            {
+                                final.Clear();
+                                foreach (var item in tempList)
+                                {
+                                    final.Add(item);
+                                }
+                                tempList.Clear();
+                                tempList.Add(ourArray[j, i]);
+                            }
+                            else
+                            {
+                                tempList.Clear();
+                                tempList.Add(ourArray[j, i]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tempList.Count > final.Count)
+                        {
+                            final.Clear();
+                            foreach (var item in tempList)
+                            {
+                                final.Add(item);
+                            }
+                            tempList.Clear();
+                            tempList.Add(ourArray[j, i]);
+                        }
+                        else
+                        {
+                            tempList.Clear();
+                            tempList.Add(ourArray[j, i]);
+                        }
+                    }
+                }
+            }
+            
+            
+            //checking diagonal
+            for (int i = 0; i < ourArray.GetLength(1); i++)
+            {
+                List<string> tempList = new List<string>();
+                tempList.Add(ourArray[0, i]);
+                for (int j1 = 1, j2 = 1; j1 < ourArray.GetLength(0); j1++, j2++)
+                {
+                    if (ourArray[j1, j2] == ourArray[j1 - 1, j2 - 1])
+                    {
+                        tempList.Add(ourArray[j1, j2]);
+                        if (j1 == ourArray.GetLength(0) - 1)
+                        {
+                            if (tempList.Count > final.Count)
+                            {
+                                final.Clear();
+                                foreach (var item in tempList)
+                                {
+                                    final.Add(item);
+                                }
+                                tempList.Clear();
+                                tempList.Add(ourArray[j1, j2]);
+                            }
+                            else
+                            {
+                                tempList.Clear();
+                                tempList.Add(ourArray[j1, j2]);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (tempList.Count > final.Count)
+                        {
+                            final.Clear();
+                            foreach (var item in tempList)
+                            {
+                                final.Add(item);
+                            }
+                            tempList.Clear();
+                            tempList.Add(ourArray[j1, j2]);
+                        }
+                        else
+                        {
+                            tempList.Clear();
+                            tempList.Add(ourArray[j1, j2]);
+                        }
+                    }
+                }
+            }
+            Console.WriteLine(String.Join(", ", final));
+        }
+    }
+
