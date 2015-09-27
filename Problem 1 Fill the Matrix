@@ -1,0 +1,73 @@
+using System;
+
+
+class FillTheMatrix
+{
+    static void Main(string[] args)
+    {
+        //Pattern A
+        int[,] ourArray = new int[4, 4];
+        int number = 1;
+
+        for (int col = 0; col < 4; col++)
+        {
+            for (int row = 0; row < 4; row++)
+            {
+                ourArray[row, col] = number;
+                number++;
+            }
+
+        }
+
+        Console.WriteLine("Pattern A");
+        for (int row = 0; row < 4; row++)
+        {
+            for (int col = 0; col < 4; col++)
+            {
+                Console.Write("{0} ", ourArray[row, col]);
+            }
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
+        Console.WriteLine();
+
+
+        //Pattern B
+        int[,] ourArray2 = new int[4, 4];
+        int number2 = 1;
+
+        for (int col = 0; col < 4; col++)
+        {
+            if (col % 2 == 0)
+            {
+                for (int row = 0; row < 4; row++)
+                {
+                    ourArray2[row, col] = number2;
+                    number2++;
+                }
+            }
+            else
+            {
+                for (int row = 3; row >= 0; row--)
+                {
+                    ourArray2[row, col] = number2;
+                    number2++;
+                }
+            }
+
+
+        }
+
+        Console.WriteLine("Pattern B");
+        for (int row = 0; row < 4; row++)
+        {
+            for (int col = 0; col < 4; col++)
+            {
+                Console.Write("{0} ", ourArray2[row, col]);
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
