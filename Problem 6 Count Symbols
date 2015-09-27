@@ -1,0 +1,28 @@
+using System;
+
+
+    class CountSymbols
+    {
+        static void Main(string[] args)
+        {
+            string inputString   = Console.ReadLine();
+            char[] ourArray = inputString.ToCharArray(); 
+            Array.Sort(ourArray);
+            int counter = 0;
+            for (int i = 0; i < ourArray.Length - 1; i++)
+            {
+                counter++;
+                if (ourArray[i] != ourArray[i + 1])
+                {
+                    Console.WriteLine("{0}: {1} time/s", ourArray[i], counter);
+                    counter = 0;
+                }
+
+                if (i == ourArray.Length - 2)
+                {
+                    Console.WriteLine("{0}: {1} time/s", ourArray[i + 1], ++counter);
+                }
+            }
+        }
+    }
+
