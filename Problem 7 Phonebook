@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+
+
+class Phonebook
+{
+    static void Main()
+        {
+            Dictionary<string, string> phonebook = new Dictionary<string, string>();
+            string[] command = Console.ReadLine().Split(' '); 
+            while (command[0]!="search")
+            {
+                if (phonebook.ContainsKey(command[0]))
+                {
+                    phonebook[command[0]] += " " + command[1];
+                }
+                else
+                {
+                    phonebook[command[0]] = command[1];
+                }
+                
+                
+                command = Console.ReadLine().Split(' '); 
+            }
+
+            do
+            {
+                string nameToSearch = Console.ReadLine();
+                if (phonebook.ContainsKey(nameToSearch))
+                {
+                    Console.WriteLine("{0} -> {1}", nameToSearch, phonebook[nameToSearch]);
+                }
+                else
+                {
+                    Console.WriteLine("Contact {0} does not exist.", nameToSearch);
+                }
+            } while (command[0]== "search");
+            
+        }
+}
+
