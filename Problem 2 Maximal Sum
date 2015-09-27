@@ -1,0 +1,66 @@
+using System;
+
+
+class MaximalSum
+{
+    static void Main()
+    {
+        // Input array dimensions
+        string[] inputDimensionsString = Console.ReadLine().Split(' ');
+        int rows = int.Parse(inputDimensionsString[0]);
+        int cols = int.Parse(inputDimensionsString[1]);
+
+        //Array definitions
+        int[,] ourArray = new int[rows, cols];
+        for (int row = 0; row < rows; row++)
+        {
+            string[] inputRowString = Console.ReadLine().Split(' ');
+            for (int col = 0; col < cols; col++)
+            {
+                ourArray[row, col] = int.Parse(inputRowString[col]);
+            }
+        }
+
+
+        // Finding Maximal Platform 3x3
+        int maxSum = int.MinValue;
+        int startRow = 0;
+        int startCol = 0;
+        for (int row = 0; row < rows - 2; row++)
+        {
+            for (int col = 0; col < cols - 2; col++)
+            {
+                int sum = 0;
+                for (int i = row; i < row + 3; i++)
+                {
+                    for (int j = col; j < col + 3; j++)
+                    {
+                        sum += ourArray[i, j];
+                    }
+                }
+                if (sum > maxSum)
+                {
+                    maxSum = sum;
+                    startRow = row;
+                    startCol = col;
+                }
+            }
+
+        }
+
+
+        
+        //Printing the sum and Maximal platform
+        Console.WriteLine();
+        Console.WriteLine("Sum= {0}", maxSum);
+        for (int row = startRow; row < startRow + 3; row++)
+        {
+            for (int col = startCol; col < startCol + 3; col++)
+            {
+                Console.Write("{0} ", ourArray[row, col]);
+            }
+            Console.WriteLine();
+        }
+
+    }
+}
