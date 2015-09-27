@@ -1,0 +1,84 @@
+using System;
+
+
+class CollectTheCoins
+{
+    static int _currRow = 0;
+    static int _currCol = 0;
+    static int _coinsCollected = 0;
+    static int _wallHits = 0;
+
+    static void Main()
+    {
+        Console.WriteLine("How many rows will be inserted?");
+        int rows = int.Parse(Console.ReadLine());
+        string[] field = new string[rows];
+        for (int i = 0; i < field.Length; i++)
+        {
+            field[i] = Console.ReadLine();
+        }
+        string moveString = Console.ReadLine();
+        Move(moveString, field);
+        Console.WriteLine("Coins collected: {0}", _coinsCollected);
+        Console.WriteLine("Walls hit: {0}", _wallHits);
+    }
+
+    static void Move(string moves, string[] field)
+    {
+        CollectCoin(field);
+        foreach (char move in moves)
+        {
+            switch (move)
+            {
+                case '^':
+                    CurrentMove(field, _currRow - 1, _currCol);
+                    break;
+                case 'V':
+                    CurrentMove(field, _currRow + 1, _currCol);
+                    break;
+                case '<':
+                    CurrentMove(field, _currRow, _currCol - 1);
+                    break;
+                case '>':
+                    CurrentMove(field, _currRow, _currCol + 1);
+                    break;
+
+
+            }
+        }
+    }
+
+    static void CurrentMove(string[] field, int row, int col)
+    {
+        if (ValidMove(field, row, col))
+        {
+            _currCol = col;
+            _currRow = row;
+            CollectCoin(field);
+        }
+        else
+        {
+            _wallHits++;
+        }
+    }
+
+
+
+    static void CollectCoin(string[] field)
+    {
+        if (field[_currRow][_currCol] == '$')
+        {
+            _coinsCollected++;
+        }
+    }
+
+    static bool ValidMove(string[] field, int row, int col)
+    {
+        if (row >= 0 && row < field.Length && col >= 0 && col < field[row].Length)
+        {
+            return true;
+        }
+        return false;
+    }
+
+}
